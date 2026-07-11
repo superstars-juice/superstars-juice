@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#FBF7EF">
+<!-- ความปลอดภัย: จำกัดแหล่งที่โหลดได้ ลดพื้นที่โจมตี XSS -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>SUPERSTAR'S JUICE · Cold-pressed wellness</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -368,6 +371,61 @@
 
   .reveal{opacity:0;transform:translateY(24px)}
   .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+
+  /* ---------- CHECKOUT ---------- */
+  .ck-modal{width:min(560px,100%);max-height:92vh;overflow-y:auto;background:var(--cream);border-radius:30px;
+    transform:translateY(24px) scale(.98);transition:.35s cubic-bezier(.2,.7,.3,1)}
+  .mscrim.open .ck-modal{transform:none}
+  .ck-head{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+    padding:18px 22px;background:var(--cream);border-bottom:1px solid var(--line)}
+  .ck-head h3{font-family:var(--head);font-weight:800;font-size:1.2rem}
+  .ck-head .x{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:1rem}
+  .ck-body{padding:20px 22px 26px}
+  .ck-steps{display:flex;gap:6px;margin-bottom:18px}
+  .ck-steps i{flex:1;height:5px;border-radius:99px;background:var(--line);font-style:normal}
+  .ck-steps i.on{background:var(--green)}
+  .ck-step{display:none}.ck-step.on{display:block;animation:ckin .3s ease}
+  @keyframes ckin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .ck-choice{display:grid;grid-template-columns:1fr;gap:12px;margin-top:6px}
+  .ck-choice button{text-align:left;padding:18px;border-radius:20px;border:2px solid var(--line);background:#fff;cursor:pointer;
+    font-family:var(--body);transition:.2s}
+  .ck-choice button:hover{border-color:var(--green);box-shadow:var(--shadow-sm)}
+  .ck-choice b{font-family:var(--head);font-size:1.05rem;display:flex;align-items:center;gap:8px}
+  .ck-choice p{margin:6px 0 0;font-size:.86rem;color:var(--muted)}
+  .field{margin-top:12px}
+  .field label{display:block;font-weight:800;font-size:.85rem;margin-bottom:6px;font-family:var(--head)}
+  .field input,.field textarea,.field select{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);
+    font-family:var(--body);font-size:1rem;background:#fff;box-sizing:border-box}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--green)}
+  .ck-note{font-size:.8rem;color:var(--muted);margin-top:10px;line-height:1.5}
+  .ck-nav{display:flex;gap:10px;margin-top:20px}
+  .ck-nav .btn{flex:1;justify-content:center}
+  .pay-opt{display:flex;align-items:flex-start;gap:12px;padding:14px;border-radius:16px;border:2px solid var(--line);
+    background:#fff;cursor:pointer;margin-top:10px;transition:.2s}
+  .pay-opt.on{border-color:var(--green);background:#F2FAF4}
+  .pay-opt input{margin-top:3px;accent-color:var(--green-d)}
+  .pay-opt b{font-family:var(--head);font-size:.98rem;display:block}
+  .pay-opt small{color:var(--muted);font-size:.8rem;line-height:1.45;display:block;margin-top:2px}
+  .mem-card{border-radius:20px;padding:18px;background:linear-gradient(135deg,#2C2B27,#4a463c);color:#fff;margin-top:6px}
+  .mem-card .mid{font-family:var(--head);font-weight:800;letter-spacing:1px;font-size:1.05rem}
+  .mem-card .mname{opacity:.85;font-size:.9rem}
+  .pts-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;font-size:.85rem}
+  .pts-bar{height:10px;border-radius:99px;background:rgba(255,255,255,.18);margin-top:6px;overflow:hidden}
+  .pts-bar i{display:block;height:100%;border-radius:99px;background:var(--yellow);transition:width .5s ease}
+  .pts-hint{font-size:.78rem;opacity:.8;margin-top:8px;line-height:1.5}
+  .redeem-box{border:2px dashed var(--yellow-d);border-radius:18px;padding:16px;margin-top:14px;background:#FFF9EA}
+  .redeem-box h5{margin:0 0 6px;font-family:var(--head);font-size:1rem}
+  .qr-wrap{margin-top:14px;background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:18px;text-align:center}
+  .qr-wrap .qr-title{font-family:var(--head);font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:8px}
+  .qr-wrap #ppqr{display:flex;justify-content:center;margin:14px 0 8px}
+  .qr-wrap #ppqr img,.qr-wrap #ppqr canvas{border-radius:8px}
+  .qr-amt{font-family:var(--head);font-weight:800;font-size:1.4rem}
+  .ck-summary{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-top:6px}
+  .mem-chip{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:var(--cream2);
+    font-size:.83rem;margin-bottom:12px;line-height:1.4}
+  .mem-chip .dot{width:34px;height:34px;flex:none;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:1rem}
+  .ln-green{background:#06C755;color:#fff}
+  .ln-green:hover{background:#05b34d}
 
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:900px){
@@ -764,14 +822,14 @@
         <div class="ic" style="color:var(--coral-d)"><svg width="26" height="26"><use href="#chat"/></svg></div>
         <h4><span class="en">Talk to us</span><span class="th-only">แชทกับเรา</span></h4>
         <ul>
-          <li><span class="en">LINE: @boostboost</span><span class="th-only">LINE: @boostboost</span></li>
+          <li><span class="ln-id">LINE: @boostboost</span></li>
           <li>WhatsApp: +66 88 000 0000</li>
           <li><span class="en">Daily 8:00–20:00 (TH/EN)</span><span class="th-only">ทุกวัน 8:00–20:00 (ไทย/อังกฤษ)</span></li>
         </ul>
       </div>
     </div>
     <div class="contact-row reveal">
-      <a class="btn btn-accent" href="#" onclick="return false"><svg width="18" height="18"><use href="#line"/></svg><span class="en">Order on LINE</span><span class="th-only">สั่งผ่าน LINE</span></a>
+      <a class="btn btn-accent ln-chat" href="#"><svg width="18" height="18"><use href="#line"/></svg><span class="en">Order on LINE</span><span class="th-only">สั่งผ่าน LINE</span></a>
       <a class="btn btn-ghost" href="#" onclick="return false"><svg width="18" height="18"><use href="#chat"/></svg>WhatsApp</a>
     </div>
   </div>
@@ -787,7 +845,7 @@
         <div class="socials">
           <a href="#" onclick="return false" aria-label="Instagram"><svg width="20" height="20"><use href="#ig"/></svg></a>
           <a href="#" onclick="return false" aria-label="TikTok"><svg width="20" height="20"><use href="#tiktok"/></svg></a>
-          <a href="#" onclick="return false" aria-label="LINE"><svg width="20" height="20"><use href="#line"/></svg></a>
+          <a href="#" class="ln-chat" aria-label="LINE"><svg width="20" height="20"><use href="#line"/></svg></a>
         </div>
       </div>
       <div>
@@ -808,7 +866,7 @@
         <h5><span class="en">Stay fresh</span><span class="th-only">อัปเดตกับเรา</span></h5>
         <a href="#" onclick="return false">Instagram</a>
         <a href="#" onclick="return false">TikTok</a>
-        <a href="#" onclick="return false">LINE @boostboost</a>
+        <a href="#" class="ln-chat ln-id">LINE @boostboost</a>
         <div class="lang" style="margin-top:12px;background:rgba(255,255,255,.1);border-color:transparent">
           <button data-lang="en" class="on" style="color:#fff">EN</button>
           <button data-lang="th" style="color:#fff">ไทย</button>
@@ -817,7 +875,7 @@
     </div>
     <div class="foot-bot">
       <span>© 2026 SUPERSTAR'S JUICE · <span class="en">Made with sunshine in Thailand</span><span class="th-only">ทำด้วยแสงแดดในประเทศไทย</span></span>
-      <span><span class="en">Privacy · Terms · This is a concept demo</span><span class="th-only">ความเป็นส่วนตัว · เงื่อนไข · เว็บตัวอย่างคอนเซปต์</span></span>
+      <span><span class="en">Privacy: your details stay on your device · Orders confirmed via LINE</span><span class="th-only">ความเป็นส่วนตัว: ข้อมูลเก็บในเครื่องคุณเท่านั้น · ยืนยันทุกออเดอร์ผ่าน LINE</span></span>
     </div>
   </div>
 </footer>
@@ -888,14 +946,44 @@
     <div class="free-ship" id="freeShip"></div>
     <div class="sline save" id="drawerSave" style="display:none"></div>
     <div class="sline total"><span class="en">Total</span><span class="th-only">รวม</span><span id="drawerTotal">฿0</span></div>
+    <div id="memChip"></div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:12px" id="checkout">
       <svg width="18" height="18"><use href="#check"/></svg><span class="en">Checkout</span><span class="th-only">ชำระเงิน</span></button>
   </div>
 </aside>
 
+<!-- ================= CHECKOUT MODAL ================= -->
+<div class="mscrim" id="ckscrim">
+  <div class="ck-modal" role="dialog" aria-modal="true">
+    <div class="ck-head">
+      <h3><span class="en">Checkout</span><span class="th-only">สั่งซื้อสินค้า</span></h3>
+      <button class="x" id="ckClose" aria-label="Close">✕</button>
+    </div>
+    <div class="ck-body">
+      <div class="ck-steps"><i id="cks1" class="on"></i><i id="cks2"></i><i id="cks3"></i></div>
+      <div class="ck-step on" id="ckStep1"></div>
+      <div class="ck-step" id="ckStep2"></div>
+      <div class="ck-step" id="ckStep3"></div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
+/* ================================================================
+   ⚙️ ตั้งค่าร้าน (แก้ตรงนี้ที่เดียว)
+   - LINE_OA   : ไอดี LINE OA ของร้าน (มี @ นำหน้า) เช่น "@superstarsjuice"
+   - PROMPTPAY : เบอร์พร้อมเพย์ เช่น "0812345678" หรือเลขบัตร ปชช. 13 หลัก
+                 ปล่อยว่าง "" = ยังไม่เปิดจ่ายผ่าน QR (ลูกค้าจะเห็นแค่โอน/ปลายทาง)
+   - FREE_AT   : สะสมครบกี่ขวดได้ฟรี 1 ขวด (ลูกค้าต้องคืนขวดครบตามจำนวน)
+   ================================================================ */
+var SHOP={
+  LINE_OA:"@boostboost",
+  PROMPTPAY:"",
+  FREE_AT:10
+};
+
 /* ---------------- DATA ---------------- */
 var PRODUCTS=[
   {id:"green",color:"#54B978",cd:"#3E9E60",name_en:"Green Tummy Cleanse",name_th:"กรีน ทัมมี่ คลีนส์",tag:"Cleanse · Hydrate · Light Body",
@@ -1174,13 +1262,13 @@ function buildDetail(id){
      '<div><div class="mixname"><span class="en">'+d.mix_en+'</span><span class="th-only">'+d.mix_th+'</span></div>'+
      '<div class="mixsub"><span class="en">'+d.mixsub_en+' · '+(d.tracks.length+1)+' songs</span><span class="th-only">'+d.mixsub_th+' · '+(d.tracks.length+1)+' เพลง</span></div></div></div>';
   h+='<div class="mix-list">';
-  h+='<a class="track feat" href="'+d.feat.url+'" target="_blank" rel="noopener"><span class="no"><svg width="14" height="14" style="color:#1db954"><use href="#play"/></svg></span>'+
+  h+='<a class="track feat" href="'+d.feat.url+'" target="_blank" rel="noopener noreferrer"><span class="no"><svg width="14" height="14" style="color:#1db954"><use href="#play"/></svg></span>'+
      '<div class="ti"><b>'+d.feat.t+'</b><span>'+d.feat.a+'</span></div><span class="fb"><span class="en">SIGNATURE</span><span class="th-only">เพลงหลัก</span></span></a>';
-  d.tracks.forEach(function(tr,i){h+='<a class="track" href="'+spSearch(tr.t+' '+tr.a)+'" target="_blank" rel="noopener">'+
+  d.tracks.forEach(function(tr,i){h+='<a class="track" href="'+spSearch(tr.t+' '+tr.a)+'" target="_blank" rel="noopener noreferrer">'+
      '<span class="no">'+(i+2)+'</span><div class="ti"><b>'+tr.t+'</b><span>'+tr.a+'</span></div>'+
      '<span class="pl"><svg width="18" height="18"><use href="#play"/></svg></span></a>';});
   h+='</div>';
-  h+='<div class="mix-foot"><a href="'+spSearch((L==='th'?d.mix_th:d.mix_en)+' '+p.name_en)+'" target="_blank" rel="noopener">'+
+  h+='<div class="mix-foot"><a href="'+spSearch((L==='th'?d.mix_th:d.mix_en)+' '+p.name_en)+'" target="_blank" rel="noopener noreferrer">'+
      '<svg width="20" height="20"><use href="#play"/></svg><span class="en">Open the full mix on Spotify</span><span class="th-only">เปิดเพลย์ลิสต์เต็มบน Spotify</span></a></div>';
   h+='</div></div>';
   return h;
@@ -1311,6 +1399,385 @@ function bump(){var c=$('#cartBtn');c.animate([{transform:'scale(1)'},{transform
 var toastT;
 function toast(msg){var el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('show')},1800)}
 
+/* ================= MEMBER / POINTS ================= */
+function TT(en,th){return lang()==='th'?th:en}
+function getMember(){try{
+  var m=JSON.parse(localStorage.getItem('ssj_member')||'null');
+  if(!m||typeof m!=='object'||typeof m.name!=='string'||typeof m.phone!=='string'||typeof m.id!=='string')return null;
+  m.name=m.name.slice(0,60);m.phone=m.phone.slice(0,20);
+  m.pts=Math.max(0,Math.floor(+m.pts||0));
+  if(!Array.isArray(m.hist))m.hist=[];
+  return m;
+}catch(e){return null}}
+function saveMember(m){try{localStorage.setItem('ssj_member',JSON.stringify(m))}catch(e){}}
+function clearMember(){try{localStorage.removeItem('ssj_member')}catch(e){}}
+function makeMemberId(phone){
+  var d=String(phone).replace(/\D/g,''),s=0;
+  for(var i=0;i<d.length;i++)s+=+d[i];
+  return 'SSJ-'+d.slice(-4)+('0'+(s%97)).slice(-2);
+}
+function renderMemChip(){
+  var el=$('#memChip');if(!el)return;
+  var m=getMember();
+  if(!m){el.innerHTML='<div class="mem-chip"><span class="dot">⭐</span><span>'+
+    TT('Join at checkout — buy '+SHOP.FREE_AT+' bottles, get 1 free (return your bottles)',
+       'สมัครสมาชิกตอนสั่งซื้อ — ครบ '+SHOP.FREE_AT+' ขวด ฟรี 1 ขวด (นำขวดมาคืน)')+'</span></div>';return}
+  var pts=m.pts||0;
+  el.innerHTML='<div class="mem-chip"><span class="dot">⭐</span><span><b>'+esc(m.name)+'</b> · '+esc(m.id)+'<br>'+
+    TT('Points ','แต้มสะสม ')+pts+' / '+SHOP.FREE_AT+
+    (pts>=SHOP.FREE_AT?TT(' — free bottle ready! 🎉',' — แลกฟรีได้ 1 ขวดแล้ว! 🎉'):'')+'</span></div>';
+}
+
+/* ================= PROMPTPAY QR ================= */
+function ppCRC(s){var c=0xFFFF;for(var i=0;i<s.length;i++){c^=s.charCodeAt(i)<<8;
+  for(var j=0;j<8;j++){c=(c&0x8000)?(((c<<1)^0x1021)&0xFFFF):((c<<1)&0xFFFF)}}
+  return ('000'+c.toString(16).toUpperCase()).slice(-4)}
+function ppTag(id,val){return id+('0'+val.length).slice(-2)+val}
+function ppPayload(amount){
+  var d=String(SHOP.PROMPTPAY).replace(/\D/g,''),sub;
+  if(d.length===13)sub=ppTag('02',d);                     /* บัตรประชาชน */
+  else{if(d.length===10&&d.charAt(0)==='0')d='0066'+d.slice(1);sub=ppTag('01',d)} /* เบอร์โทร */
+  var mai=ppTag('00','A000000677010111')+sub;
+  var p=ppTag('00','01')+ppTag('01',amount?'12':'11')+ppTag('29',mai)+ppTag('58','TH')+ppTag('53','764');
+  if(amount)p+=ppTag('54',amount.toFixed(2));
+  p+='6304';
+  return p+ppCRC(p);
+}
+/* ---- QR encoder ฝังในไฟล์ (byte mode, EC M, v1-6) — ตรวจสอบแล้วกับ OpenCV decoder ---- */
+var QRM=(function(){
+  var EXP=[],LOG=[];
+  (function(){var x=1;for(var i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&0x100)x^=0x11D}for(var i=255;i<512;i++)EXP[i]=EXP[i-255]})();
+  function gmul(a,b){if(!a||!b)return 0;return EXP[LOG[a]+LOG[b]]}
+  function rsGen(n){var g=[1];for(var i=0;i<n;i++){var ng=new Array(g.length+1).fill(0);
+    for(var j=0;j<g.length;j++){ng[j]^=g[j];ng[j+1]^=gmul(g[j],EXP[i])}g=ng}return g}
+  function rsEC(data,n){var g=rsGen(n),res=data.concat(new Array(n).fill(0));
+    for(var i=0;i<data.length;i++){var f=res[i];if(f===0)continue;
+      for(var j=0;j<g.length;j++)res[i+j]^=gmul(g[j],f)}
+    return res.slice(data.length)}
+  /* version tables: EC level M */
+  var DATA_CW=[0,16,28,44,64,86,108];
+  var BLOCKS =[0,[16],[28],[44],[32,32],[43,43],[27,27,27,27]];
+  var EC_CW  =[0,10,16,26,18,24,16];
+  var ALIGN  =[0,null,18,22,26,30,34];
+  function toUTF8(s){var out=[];for(var i=0;i<s.length;i++){var c=s.codePointAt(i);
+    if(c>0xFFFF)i++;
+    if(c<0x80)out.push(c);
+    else if(c<0x800){out.push(0xC0|c>>6,0x80|c&63)}
+    else if(c<0x10000){out.push(0xE0|c>>12,0x80|(c>>6)&63,0x80|c&63)}
+    else{out.push(0xF0|c>>18,0x80|(c>>12)&63,0x80|(c>>6)&63,0x80|c&63)}}return out}
+  var MASKS=[
+    function(r,c){return (r+c)%2===0},
+    function(r,c){return r%2===0},
+    function(r,c){return c%3===0},
+    function(r,c){return (r+c)%3===0},
+    function(r,c){return ((r>>1)+Math.floor(c/3))%2===0},
+    function(r,c){return (r*c)%2+(r*c)%3===0},
+    function(r,c){return ((r*c)%2+(r*c)%3)%2===0},
+    function(r,c){return ((r*c)%3+(r+c)%2)%2===0}
+  ];
+  function bch15(v){var d=v<<10;while(deg(d)-deg(0x537)>=0)d^=0x537<<(deg(d)-deg(0x537));return ((v<<10)|d)^0x5412}
+  function deg(x){var n=-1;while(x){n++;x>>=1}return n}
+  function build(text){
+    var bytes=toUTF8(text),ver=0;
+    for(var v=1;v<=6;v++){if(4+8+8*bytes.length<=DATA_CW[v]*8){ver=v;break}}
+    if(!ver)throw new Error('too long');
+    /* bitstream */
+    var bits=[],push=function(val,n){for(var i=n-1;i>=0;i--)bits.push((val>>i)&1)};
+    push(4,4);push(bytes.length,8);
+    bytes.forEach(function(b){push(b,8)});
+    var cap=DATA_CW[ver]*8;
+    push(0,Math.min(4,cap-bits.length));
+    while(bits.length%8)bits.push(0);
+    var pads=[0xEC,0x11],pi=0;
+    while(bits.length<cap){push(pads[pi%2],8);pi++}
+    var cw=[];for(var i=0;i<bits.length;i+=8){var b=0;for(var j=0;j<8;j++)b=(b<<1)|bits[i+j];cw.push(b)}
+    /* blocks + interleave */
+    var blocks=BLOCKS[ver],ecn=EC_CW[ver],dbs=[],ebs=[],off=0;
+    blocks.forEach(function(n){var d=cw.slice(off,off+n);off+=n;dbs.push(d);ebs.push(rsEC(d,ecn))});
+    var all=[],maxd=Math.max.apply(null,blocks);
+    for(var i=0;i<maxd;i++)dbs.forEach(function(d){if(i<d.length)all.push(d[i])});
+    for(var i=0;i<ecn;i++)ebs.forEach(function(e){all.push(e[i])});
+    return {ver:ver,data:all};
+  }
+  function matrix(text){
+    var b=build(text),ver=b.ver,size=17+4*ver;
+    var best=null,bestPen=Infinity;
+    for(var mask=0;mask<8;mask++){
+      var m=place(ver,size,b.data,mask),pen=penalty(m,size);
+      if(pen<bestPen){bestPen=pen;best=m}
+    }
+    return best;
+  }
+  function place(ver,size,data,mask){
+    var m=[];for(var i=0;i<size;i++){m.push(new Array(size).fill(null))}
+    function finder(r0,c0){for(var r=-1;r<8;r++)for(var c=-1;c<8;c++){
+      var rr=r0+r,cc=c0+c;if(rr<0||rr>=size||cc<0||cc>=size)continue;
+      var dark=(r>=0&&r<=6&&(c===0||c===6))||(c>=0&&c<=6&&(r===0||r===6))||(r>=2&&r<=4&&c>=2&&c<=4);
+      m[rr][cc]=dark?1:0}}
+    finder(0,0);finder(size-7,0);finder(0,size-7);
+    var ac=ALIGN[ver];
+    if(ac){[[6,6],[6,ac],[ac,6],[ac,ac]].forEach(function(p){
+      var r0=p[0],c0=p[1];if(m[r0][c0]!==null)return;
+      for(var r=-2;r<=2;r++)for(var c=-2;c<=2;c++){
+        var dark=Math.max(Math.abs(r),Math.abs(c))!==1;
+        m[r0+r][c0+c]=dark?1:0}})}
+    for(var i=8;i<size-8;i++){if(m[i][6]===null)m[i][6]=(i%2===0)?1:0;if(m[6][i]===null)m[6][i]=(i%2===0)?1:0}
+    /* format info */
+    var fb=bch15(mask); /* EC M = 00 -> high bits are just mask */
+    for(var i=0;i<15;i++){var mod=((fb>>i)&1)===1?1:0;
+      if(i<6)m[i][8]=mod;else if(i<8)m[i+1][8]=mod;else m[size-15+i][8]=mod}
+    for(var i=0;i<15;i++){var mod=((fb>>i)&1)===1?1:0;
+      if(i<8)m[8][size-1-i]=mod;else if(i<9)m[8][15-i]=mod;else m[8][15-i-1]=mod}
+    m[size-8][8]=1;
+    /* data */
+    var inc=-1,row=size-1,bitIdx=7,byteIdx=0;
+    for(var col=size-1;col>0;col-=2){
+      if(col===6)col--;
+      while(true){
+        for(var c=0;c<2;c++){
+          if(m[row][col-c]===null){
+            var dark=false;
+            if(byteIdx<data.length)dark=((data[byteIdx]>>>bitIdx)&1)===1;
+            if(MASKS[mask](row,col-c))dark=!dark;
+            m[row][col-c]=dark?1:0;
+            bitIdx--;if(bitIdx===-1){byteIdx++;bitIdx=7}
+          }
+        }
+        row+=inc;
+        if(row<0||row>=size){row-=inc;inc=-inc;break}
+      }
+    }
+    return m;
+  }
+  function penalty(m,size){
+    var p=0,r,c;
+    for(r=0;r<size;r++){var run=1;for(c=1;c<size;c++){if(m[r][c]===m[r][c-1])run++;else{if(run>=5)p+=3+run-5;run=1}}if(run>=5)p+=3+run-5}
+    for(c=0;c<size;c++){var run=1;for(r=1;r<size;r++){if(m[r][c]===m[r-1][c])run++;else{if(run>=5)p+=3+run-5;run=1}}if(run>=5)p+=3+run-5}
+    for(r=0;r<size-1;r++)for(c=0;c<size-1;c++){var v=m[r][c];if(v===m[r][c+1]&&v===m[r+1][c]&&v===m[r+1][c+1])p+=3}
+    var pat1=[1,0,1,1,1,0,1,0,0,0,0],pat2=[0,0,0,0,1,0,1,1,1,0,1];
+    for(r=0;r<size;r++)for(c=0;c<size-10;c++){
+      var ok1=true,ok2=true,ok3=true,ok4=true;
+      for(var k=0;k<11;k++){
+        if(m[r][c+k]!==pat1[k])ok1=false; if(m[r][c+k]!==pat2[k])ok2=false;
+        if(m[c+k]&&m[c+k][r]!==undefined){if(m[c+k][r]!==pat1[k])ok3=false;if(m[c+k][r]!==pat2[k])ok4=false}else{ok3=ok4=false}
+      }
+      if(ok1||ok2)p+=40; if(ok3||ok4)p+=40;
+    }
+    var dark=0;for(r=0;r<size;r++)for(c=0;c<size;c++)dark+=m[r][c];
+    p+=Math.floor(Math.abs(dark*100/(size*size)-50)/5)*10;
+    return p;
+  }
+  function svg(text,px,margin){
+    px=px||5;margin=(margin===undefined)?3:margin;
+    var m=matrix(text),n=m.length,dim=(n+margin*2)*px,path='';
+    for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(m[r][c])path+='M'+((c+margin)*px)+' '+((r+margin)*px)+'h'+px+'v'+px+'h-'+px+'z';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+dim+' '+dim+'" width="'+dim+'" height="'+dim+'" shape-rendering="crispEdges">'+
+      '<rect width="'+dim+'" height="'+dim+'" fill="#fff"/><path d="'+path+'" fill="#000"/></svg>';
+  }
+  return {matrix:matrix,svg:svg};
+})();
+
+/* ================= CHECKOUT ================= */
+var ck={step:1,mode:null,pay:(SHOP.PROMPTPAY?'pp':'ln'),deliv:'delivery',redeem:false,freeId:'green',signupOpen:false,form:{name:'',phone:'',addr:''},su:{name:'',phone:''}};
+
+function openCheckout(){
+  var m=getMember();
+  if(m){ck.form.name=ck.form.name||m.name;ck.form.phone=ck.form.phone||m.phone}
+  ck.step=1;ckRender();
+  $('#ckscrim').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeCheckout(){$('#ckscrim').classList.remove('open');document.body.style.overflow=''}
+
+function ckGo(n){ck.step=n;ckRender()}
+function ckRender(){
+  [1,2,3].forEach(function(n){
+    $('#ckStep'+n).classList.toggle('on',ck.step===n);
+    $('#cks'+n).classList.toggle('on',ck.step>=n);
+  });
+  if(ck.step===1)ckRender1();
+  if(ck.step===2)ckRender2();
+  if(ck.step===3)ckRender3();
+}
+
+/* ---- step 1 : member or guest ---- */
+function ckRender1(){
+  var m=getMember(),h='';
+  if(m){
+    var pts=m.pts||0,pc=Math.min(100,Math.round(pts/SHOP.FREE_AT*100));
+    h+='<div class="mem-card"><div class="mid">'+esc(m.id)+'</div><div class="mname">'+esc(m.name)+' · '+esc(m.phone)+'</div>'+
+      '<div class="pts-row"><span>'+TT('Loyalty points','แต้มสะสม')+'</span><b>'+pts+' / '+SHOP.FREE_AT+'</b></div>'+
+      '<div class="pts-bar"><i style="width:'+pc+'%"></i></div>'+
+      '<div class="pts-hint">'+TT('Buy '+SHOP.FREE_AT+' bottles → get 1 free. Return '+SHOP.FREE_AT+' empty bottles to redeem.',
+        'ซื้อครบ '+SHOP.FREE_AT+' ขวด ฟรี 1 ขวด — นำขวดเปล่ามาคืน '+SHOP.FREE_AT+' ใบตอนแลก')+'</div></div>'+
+      '<div class="ck-nav"><button class="btn btn-accent" data-ck="member">'+TT('Continue as member','สั่งซื้อแบบสมาชิก')+' →</button></div>'+
+      '<p class="ck-note" style="text-align:center"><a href="#" data-ck="logout" style="text-decoration:underline">'+TT('Not you? Sign out on this device','ไม่ใช่คุณ? ออกจากระบบเครื่องนี้')+'</a></p>'+
+      '<div style="border-top:1px solid var(--line);margin:16px 0"></div>';
+  }
+  h+='<div class="ck-choice">';
+  if(!m){
+    h+='<button data-ck="member"><b>⭐ '+TT('Order as member','สั่งซื้อแบบสมาชิก')+'</b>'+
+      '<p>'+TT('Collect points — buy '+SHOP.FREE_AT+' bottles, get 1 FREE (return your empty bottles). Just name + phone.',
+        'สะสมแต้ม ซื้อครบ '+SHOP.FREE_AT+' ขวด ฟรี 1 ขวด (นำขวดเปล่ามาคืน) — ใช้แค่ชื่อกับเบอร์โทร')+'</p></button>';
+  }
+  h+='<button data-ck="guest"><b>🛍️ '+TT('Order without account','สั่งซื้อแบบไม่สมัครสมาชิก')+'</b>'+
+    '<p>'+TT('Quick checkout, no sign-up needed.','สั่งได้เลย ไม่ต้องสมัครอะไรทั้งนั้น')+'</p></button></div>';
+  if(!m){
+    h+='<div id="ckSignup" style="display:'+(ck.signupOpen?'block':'none')+'">'+
+      '<div class="field"><label>'+TT('Your name','ชื่อของคุณ')+'</label><input id="suName" maxlength="60" value="'+esc(ck.su.name)+'" placeholder="'+TT('e.g. Ploy','เช่น พลอย')+'"></div>'+
+      '<div class="field"><label>'+TT('Phone number','เบอร์โทรศัพท์')+'</label><input id="suPhone" inputmode="tel" maxlength="12" value="'+esc(ck.su.phone)+'" placeholder="08x-xxx-xxxx"></div>'+
+      '<p class="ck-note">🔒 '+TT('Your details are stored only on THIS device (nothing is uploaded to any server). We use them to fill your order message to LINE.',
+        'ข้อมูลถูกเก็บไว้ในเครื่องของคุณเท่านั้น (ไม่มีการอัปโหลดขึ้นเซิร์ฟเวอร์ใด ๆ) ใช้เพื่อกรอกออเดอร์ที่ส่งเข้า LINE ร้านเท่านั้น')+'</p>'+
+      '<div class="ck-nav"><button class="btn btn-accent" data-ck="signup">'+TT('Create member ID','สร้างรหัสสมาชิก')+' ⭐</button></div></div>';
+  }
+  $('#ckStep1').innerHTML=h;
+}
+
+/* ---- step 2 : delivery + payment ---- */
+function ckRender2(){
+  var f=ck.form;
+  var h='<div class="field"><label>'+TT('Name','ชื่อผู้รับ')+'</label><input id="ckName" maxlength="60" value="'+esc(f.name)+'"></div>'+
+    '<div class="field"><label>'+TT('Phone','เบอร์โทร')+'</label><input id="ckPhone" inputmode="tel" maxlength="12" value="'+esc(f.phone)+'"></div>'+
+    '<div class="field"><label>'+TT('Receive by','รับสินค้าแบบ')+'</label>'+
+    '<label class="pay-opt'+(ck.deliv==='delivery'?' on':'')+'"><input type="radio" name="deliv" value="delivery"'+(ck.deliv==='delivery'?' checked':'')+'><span><b>🚚 '+TT('Delivery','จัดส่งถึงที่')+'</b><small>'+TT('Same-day in Pattaya area · free over ฿590','ส่งวันเดียวโซนพัทยา · ฟรีเมื่อครบ ฿590')+'</small></span></label>'+
+    '<label class="pay-opt'+(ck.deliv==='pickup'?' on':'')+'"><input type="radio" name="deliv" value="pickup"'+(ck.deliv==='pickup'?' checked':'')+'><span><b>🏪 '+TT('Pickup','รับเอง')+'</b><small>'+TT('We\'ll confirm the pickup point in LINE','นัดจุดรับกันใน LINE')+'</small></span></label></div>'+
+    '<div class="field" id="ckAddrWrap" style="display:'+(ck.deliv==='delivery'?'block':'none')+'"><label>'+TT('Delivery address','ที่อยู่จัดส่ง')+'</label><textarea id="ckAddr" rows="2" placeholder="'+TT('House no., street, area…','บ้านเลขที่ ถนน ตำบล…')+'">'+esc(f.addr)+'</textarea></div>'+
+    '<div class="field"><label>'+TT('Payment','วิธีชำระเงิน')+'</label>';
+  if(SHOP.PROMPTPAY){
+    h+='<label class="pay-opt'+(ck.pay==='pp'?' on':'')+'"><input type="radio" name="pay" value="pp"'+(ck.pay==='pp'?' checked':'')+'><span><b>📱 PromptPay QR</b><small>'+TT('Scan & pay instantly, then send the slip in LINE','สแกนจ่ายได้ทันที แล้วส่งสลิปใน LINE')+'</small></span></label>';
+  }
+  h+='<label class="pay-opt'+(ck.pay==='ln'?' on':'')+'"><input type="radio" name="pay" value="ln"'+(ck.pay==='ln'?' checked':'')+'><span><b>💬 '+TT('Bank transfer via LINE','โอนเงิน (แจ้งบัญชีใน LINE)')+'</b><small>'+TT('We\'ll send account details in LINE chat','ร้านจะส่งเลขบัญชีให้ในแชท LINE')+'</small></span></label>'+
+    '<label class="pay-opt'+(ck.pay==='cod'?' on':'')+'"><input type="radio" name="pay" value="cod"'+(ck.pay==='cod'?' checked':'')+'><span><b>💵 '+TT('Cash on delivery','เก็บเงินปลายทาง')+'</b><small>'+TT('Pay cash when you receive your juice','จ่ายเงินสดตอนรับสินค้า')+'</small></span></label></div>'+
+    '<div class="ck-nav"><button class="btn btn-ghost" data-ck="back1">←</button><button class="btn btn-accent" data-ck="to3" style="flex:3">'+TT('Review order','ตรวจสอบออเดอร์')+' →</button></div>';
+  $('#ckStep2').innerHTML=h;
+}
+
+/* ---- step 3 : summary + pay + send to LINE ---- */
+function ckRender3(){
+  var tt=cartTotals(),m=getMember(),h='<div class="ck-summary">';
+  for(var k in cart){if(cart[k]>0){var p=P[k];
+    h+='<div class="sline"><span>'+(lang()==='th'?p.name_th:p.name_en)+' × '+cart[k]+'</span><span>฿'+(cart[k]*p.price)+'</span></div>';
+  }}
+  if(tt.save>0)h+='<div class="sline save"><span>'+TT('Pack discount','ส่วนลดแพ็ก')+' −'+Math.round(tt.rate*100)+'%</span><span>−฿'+tt.save+'</span></div>';
+  if(ck.mode==='member'&&ck.redeem){var fp=P[ck.freeId];
+    h+='<div class="sline save"><span>🎁 '+TT('Free bottle (points)','ขวดฟรีจากแต้ม')+': '+(lang()==='th'?fp.name_th:fp.name_en)+' × 1</span><span>฿0</span></div>';
+  }
+  h+='<div class="sline total"><span>'+TT('Total','รวมสุทธิ')+'</span><span>฿'+tt.total+'</span></div></div>';
+  /* redeem box */
+  if(ck.mode==='member'&&m&&(m.pts||0)>=SHOP.FREE_AT){
+    h+='<div class="redeem-box"><h5>🎉 '+TT('You have '+m.pts+' points — redeem a FREE bottle!','คุณมี '+m.pts+' แต้ม — แลกขวดฟรีได้เลย!')+'</h5>'+
+      '<label class="pay-opt'+(ck.redeem?' on':'')+'" style="margin-top:8px"><input type="checkbox" id="ckRedeem"'+(ck.redeem?' checked':'')+'><span><b>'+TT('Use '+SHOP.FREE_AT+' points now','ใช้ '+SHOP.FREE_AT+' แต้มตอนนี้')+'</b><small>'+TT('Bring back '+SHOP.FREE_AT+' empty bottles when you receive this order','นำขวดเปล่า '+SHOP.FREE_AT+' ใบมาคืนตอนรับสินค้า')+'</small></span></label>';
+    if(ck.redeem){
+      h+='<div class="field"><label>'+TT('Choose your free formula','เลือกสูตรขวดฟรี')+'</label><select id="ckFree">';
+      PRODUCTS.forEach(function(p){h+='<option value="'+p.id+'"'+(ck.freeId===p.id?' selected':'')+'>'+(lang()==='th'?p.name_th:p.name_en)+'</option>'});
+      h+='</select></div>';
+    }
+    h+='</div>';
+  }
+  /* payment area */
+  if(ck.pay==='pp'&&SHOP.PROMPTPAY){
+    h+='<div class="qr-wrap"><div class="qr-title">📱 '+TT('Scan to pay with any Thai bank app','สแกนจ่ายด้วยแอปธนาคารไหนก็ได้')+'</div>'+
+      '<div id="ppqr"></div><div class="qr-amt">฿'+tt.total+'</div>'+
+      '<p class="ck-note">'+TT('PromptPay · After paying, tap the green button to send your order + slip in LINE',
+        'พร้อมเพย์ · จ่ายแล้วกดปุ่มเขียวด้านล่าง เพื่อส่งออเดอร์และแนบสลิปใน LINE')+'</p></div>';
+  }
+  var pm={pp:'PromptPay',ln:TT('Bank transfer via LINE','โอนเงิน (แจ้งใน LINE)'),cod:TT('Cash on delivery','เก็บเงินปลายทาง')};
+  h+='<p class="ck-note">'+TT('Receive: ','รับสินค้า: ')+(ck.deliv==='delivery'?TT('Delivery','จัดส่ง'):TT('Pickup','รับเอง'))+' · '+TT('Pay: ','ชำระ: ')+pm[ck.pay]+'</p>'+
+    '<div class="ck-nav"><button class="btn btn-ghost" data-ck="back2">←</button>'+
+    '<button class="btn ln-green" data-ck="send" style="flex:3"><svg width="18" height="18"><use href="#line"/></svg>'+TT('Send order via LINE','ส่งออเดอร์ผ่าน LINE')+'</button></div>'+
+    '<p class="ck-note" style="text-align:center">'+TT('Your order opens in LINE — just press send. We confirm every order in chat before preparing it.',
+      'ออเดอร์จะเปิดในแอป LINE — กดส่งได้เลย ร้านจะยืนยันทุกออเดอร์ในแชทก่อนเตรียมสินค้า')+'</p>';
+  $('#ckStep3').innerHTML=h;
+  if(ck.pay==='pp'&&SHOP.PROMPTPAY){
+    var qel=$('#ppqr');
+    if(qel){try{qel.innerHTML=QRM.svg(ppPayload(tt.total),5,3);qel.firstChild.style.width='190px';qel.firstChild.style.height='190px'}
+      catch(err){qel.innerHTML='<p style="font-size:.85rem;color:var(--muted)">'+TT('QR unavailable — please pay via LINE instead.','สร้าง QR ไม่สำเร็จ — ชำระผ่าน LINE แทนได้เลย')+'</p>'}}
+  }
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+
+/* ---- order message + LINE deep link ---- */
+function buildOrderMsg(){
+  var tt=cartTotals(),m=getMember(),L=lang()==='th';
+  var lines=[L?'🧾 ออเดอร์ใหม่ — SUPERSTAR\'S JUICE':'🧾 New order — SUPERSTAR\'S JUICE','━━━━━━━━━━'];
+  for(var k in cart){if(cart[k]>0){var p=P[k];
+    lines.push('• '+(L?p.name_th:p.name_en)+' × '+cart[k]+' = ฿'+(cart[k]*p.price));}}
+  if(tt.save>0)lines.push((L?'ส่วนลดแพ็ก':'Pack discount')+' −฿'+tt.save);
+  if(ck.mode==='member'&&ck.redeem){var fp=P[ck.freeId];
+    lines.push('🎁 '+(L?'แลกแต้มขวดฟรี: ':'FREE bottle (points): ')+(L?fp.name_th:fp.name_en)+' × 1 '+(L?'(คืนขวดเปล่า '+SHOP.FREE_AT+' ใบ)':'(returning '+SHOP.FREE_AT+' empty bottles)'));}
+  lines.push((L?'รวมสุทธิ: ':'Total: ')+'฿'+tt.total,'━━━━━━━━━━');
+  lines.push('👤 '+ck.form.name,'📞 '+ck.form.phone);
+  lines.push(ck.deliv==='delivery'?('🚚 '+(L?'จัดส่ง: ':'Deliver to: ')+ck.form.addr):('🏪 '+(L?'รับเอง (นัดจุดรับในแชท)':'Pickup (arrange in chat)')));
+  var pm={pp:L?'PromptPay (สแกนจ่ายแล้ว จะส่งสลิปตามมา)':'PromptPay (paid by QR — slip to follow)',ln:L?'ขอเลขบัญชีเพื่อโอน':'Please send bank details',cod:L?'เก็บเงินปลายทาง':'Cash on delivery'};
+  lines.push('💳 '+pm[ck.pay]);
+  if(ck.mode==='member'&&m){
+    var newPts=(m.pts||0)+(ck.redeem?-SHOP.FREE_AT:0)+tt.qty;
+    lines.push('⭐ '+(L?'สมาชิก ':'Member ')+m.id+' ('+m.name+') · '+(L?'แต้มหลังออเดอร์นี้: ':'points after this order: ')+newPts+'/'+SHOP.FREE_AT);
+  }else lines.push(L?'🛍️ ลูกค้าทั่วไป (ไม่สมัครสมาชิก)':'🛍️ Guest order');
+  return lines.join('\n');
+}
+function sendOrderToLine(){
+  var name=ck.form.name.trim(),phone=ck.form.phone.replace(/\D/g,'');
+  if(!name||phone.length<9){toast(TT('Please fill your name and phone','กรุณากรอกชื่อและเบอร์โทรให้ครบ'));ckGo(2);return}
+  if(ck.deliv==='delivery'&&!ck.form.addr.trim()){toast(TT('Please add a delivery address','กรุณากรอกที่อยู่จัดส่ง'));ckGo(2);return}
+  var msg=buildOrderMsg(),tt=cartTotals(),m=getMember();
+  /* award / deduct points */
+  if(ck.mode==='member'&&m){
+    m.pts=(m.pts||0)+(ck.redeem?-SHOP.FREE_AT:0)+tt.qty;
+    m.hist=m.hist||[];m.hist.push({d:new Date().toISOString().slice(0,10),q:tt.qty,t:tt.total,r:ck.redeem?1:0});
+    if(m.hist.length>50)m.hist=m.hist.slice(-50);
+    saveMember(m);
+  }
+  var url='https://line.me/R/oaMessage/'+encodeURIComponent(SHOP.LINE_OA)+'/?'+encodeURIComponent(msg);
+  window.open(url,'_blank','noopener');
+  cart={};ck.redeem=false;updateCart();renderMemChip();closeCheckout();closeCart();
+  toast(TT('Order sent to LINE — press send in the app ✓','เปิด LINE แล้ว — กดส่งข้อความในแอปได้เลย ✓'));
+}
+
+/* ---- checkout events (delegated) ---- */
+$('#ckClose').addEventListener('click',closeCheckout);
+$('#ckscrim').addEventListener('click',function(e){if(e.target===$('#ckscrim'))closeCheckout()});
+$('#ckscrim').addEventListener('input',function(e){
+  if(e.target.id==='ckName')ck.form.name=e.target.value;
+  if(e.target.id==='ckPhone')ck.form.phone=e.target.value;
+  if(e.target.id==='ckAddr')ck.form.addr=e.target.value;
+  if(e.target.id==='suName')ck.su.name=e.target.value;
+  if(e.target.id==='suPhone')ck.su.phone=e.target.value;
+});
+$('#ckscrim').addEventListener('change',function(e){
+  if(e.target.name==='deliv'){ck.deliv=e.target.value;ckRender2()}
+  if(e.target.name==='pay'){ck.pay=e.target.value;ckRender2()}
+  if(e.target.id==='ckRedeem'){ck.redeem=e.target.checked;ckRender3()}
+  if(e.target.id==='ckFree'){ck.freeId=e.target.value;ckRender3()}
+});
+$('#ckscrim').addEventListener('click',function(e){
+  var el=e.target.closest('[data-ck]');if(!el)return;e.preventDefault();
+  var a=el.dataset.ck;
+  if(a==='guest'){ck.mode='guest';ckGo(2)}
+  if(a==='member'){
+    if(getMember()){ck.mode='member';var mm=getMember();ck.form.name=mm.name;ck.form.phone=mm.phone;ckGo(2)}
+    else{ck.signupOpen=true;var su=$('#ckSignup');su.style.display='block';su.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  }
+  if(a==='signup'){
+    var n=$('#suName').value.trim().replace(/[<>]/g,''),p=$('#suPhone').value.replace(/\D/g,'');
+    if(!n||p.length<9){toast(TT('Please fill name + valid phone','กรอกชื่อและเบอร์โทรให้ถูกต้อง'));return}
+    var mem={name:n,phone:p,id:makeMemberId(p),pts:0,hist:[]};
+    saveMember(mem);ck.mode='member';ck.form.name=n;ck.form.phone=p;ck.signupOpen=false;
+    renderMemChip();toast(TT('Welcome! Your member ID: ','ยินดีต้อนรับ! รหัสสมาชิกของคุณ: ')+mem.id);ckGo(2);
+  }
+  if(a==='logout'){clearMember();ck.mode=null;ck.redeem=false;ck.signupOpen=false;renderMemChip();ckRender1()}
+  if(a==='back1')ckGo(1);
+  if(a==='back2')ckGo(2);
+  if(a==='to3'){
+    ck.form.name=(($('#ckName')||{}).value||ck.form.name).replace(/[<>]/g,'');
+    ck.form.phone=($('#ckPhone')||{}).value||ck.form.phone;
+    var ad=$('#ckAddr');if(ad)ck.form.addr=ad.value.replace(/[<>]/g,'');
+    if(!ck.form.name.trim()||ck.form.phone.replace(/\D/g,'').length<9){toast(TT('Please fill your name and phone','กรุณากรอกชื่อและเบอร์โทรให้ครบ'));return}
+    if(ck.deliv==='delivery'&&!ck.form.addr.trim()){toast(TT('Please add a delivery address','กรุณากรอกที่อยู่จัดส่ง'));return}
+    ckGo(3);
+  }
+  if(a==='send')sendOrderToLine();
+});
+
 /* ---------------- MARQUEE ---------------- */
 function renderMarquee(){
   var items=lang()==='th'
@@ -1324,7 +1791,8 @@ function renderMarquee(){
 function setLang(l){
   document.body.dataset.lang=l;document.documentElement.lang=l;
   document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===l)});
-  renderMarquee();updateCart();renderBundleSummary();
+  renderMarquee();updateCart();renderBundleSummary();renderMemChip();
+  if($('#ckscrim').classList.contains('open'))ckRender();
   if(modalId)openInfo(modalId);
   if(landingId)showLanding(landingId);
   if(moodPick!==null){var i=null;document.querySelectorAll('.moodcard').forEach(function(el,idx){if(el.classList.contains('active'))i=idx});if(i!==null)showMood(i);}
@@ -1335,7 +1803,7 @@ renderProducts();renderMoods();renderLife();renderSocial();renderBundleList();re
 document.querySelectorAll('[data-hb]').forEach(function(el){el.innerHTML=realBottle(el.dataset.hb,'')});
 
 document.addEventListener('click',function(e){
-  var el=e.target.closest('[data-add],[data-mood],[data-qp],[data-inc],[data-dec],[data-cinc],[data-cdec],[data-lang],[data-info]');
+  var el=e.target.closest('[data-add],[data-mood],[data-qp],[data-inc],[data-dec],[data-cinc],[data-cdec],button[data-lang],[data-info]');
   if(!el)return;
   if(el.dataset.info){openInfo(el.dataset.info);return}
   if(el.dataset.add){addToCart(el.dataset.add);el.classList.add('added');
@@ -1363,11 +1831,19 @@ $('#mscrim').addEventListener('click',function(e){if(e.target===$('#mscrim'))clo
 document.addEventListener('click',function(e){if(e.target.closest('#modalCloseBtn'))closeInfo()});
 $('#landingEnter').addEventListener('click',hideLanding);
 $('#landingEnterTop').addEventListener('click',hideLanding);
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeInfo();closeCart()}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeInfo();closeCart();closeCheckout()}});
 $('#checkout').addEventListener('click',function(){
   if(cartQty()===0){toast(lang()==='th'?'ตะกร้ายังว่างอยู่':'Your bag is empty');return}
-  toast(lang()==='th'?'เดโม: เชื่อมต่อ PromptPay/LINE ได้เลย ✨':'Demo: connect PromptPay / LINE here ✨');
+  openCheckout();
 });
+
+/* wire LINE links + member chip */
+(function(){
+  var chat='https://line.me/R/ti/p/'+encodeURIComponent(SHOP.LINE_OA);
+  document.querySelectorAll('.ln-chat').forEach(function(a){a.href=chat;a.removeAttribute('onclick');a.target='_blank';a.rel='noopener noreferrer'});
+  document.querySelectorAll('.ln-id').forEach(function(el){el.textContent='LINE: '+SHOP.LINE_OA});
+  renderMemChip();
+})();
 
 /* nav shadow */
 window.addEventListener('scroll',function(){$('#nav').classList.toggle('scrolled',window.scrollY>10)});
