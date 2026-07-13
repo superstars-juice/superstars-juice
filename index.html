@@ -420,6 +420,8 @@
   .qr-wrap #ppqr{display:flex;justify-content:center;margin:14px 0 8px}
   .qr-wrap #ppqr img,.qr-wrap #ppqr canvas{border-radius:8px}
   .qr-amt{font-family:var(--head);font-weight:800;font-size:1.4rem}
+  .qr-payee{font-size:.9rem;color:var(--ink);margin:6px 0 0}
+  .qr-payee b{font-weight:700}
   .ck-summary{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-top:6px}
   .mem-chip{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:var(--cream2);
     font-size:.83rem;margin-bottom:12px;line-height:1.4}
@@ -822,7 +824,7 @@
         <div class="ic" style="color:var(--coral-d)"><svg width="26" height="26"><use href="#chat"/></svg></div>
         <h4><span class="en">Talk to us</span><span class="th-only">แชทกับเรา</span></h4>
         <ul>
-          <li><span class="ln-id">LINE: @boostboost</span></li>
+          <li><span class="ln-id">LINE: @797rbotj</span></li>
           <li>WhatsApp: +66 88 000 0000</li>
           <li><span class="en">Daily 8:00–20:00 (TH/EN)</span><span class="th-only">ทุกวัน 8:00–20:00 (ไทย/อังกฤษ)</span></li>
         </ul>
@@ -866,7 +868,7 @@
         <h5><span class="en">Stay fresh</span><span class="th-only">อัปเดตกับเรา</span></h5>
         <a href="#" onclick="return false">Instagram</a>
         <a href="#" onclick="return false">TikTok</a>
-        <a href="#" class="ln-chat ln-id">LINE @boostboost</a>
+        <a href="#" class="ln-chat ln-id">LINE @797rbotj</a>
         <div class="lang" style="margin-top:12px;background:rgba(255,255,255,.1);border-color:transparent">
           <button data-lang="en" class="on" style="color:#fff">EN</button>
           <button data-lang="th" style="color:#fff">ไทย</button>
@@ -973,14 +975,16 @@
 <script>
 /* ================================================================
    ⚙️ ตั้งค่าร้าน (แก้ตรงนี้ที่เดียว)
-   - LINE_OA   : ไอดี LINE OA ของร้าน (มี @ นำหน้า) เช่น "@superstarsjuice"
-   - PROMPTPAY : เบอร์พร้อมเพย์ เช่น "0812345678" หรือเลขบัตร ปชช. 13 หลัก
-                 ปล่อยว่าง "" = ยังไม่เปิดจ่ายผ่าน QR (ลูกค้าจะเห็นแค่โอน/ปลายทาง)
-   - FREE_AT   : สะสมครบกี่ขวดได้ฟรี 1 ขวด (ลูกค้าต้องคืนขวดครบตามจำนวน)
+   - LINE_OA    : ไอดี LINE OA ของร้าน (มี @ นำหน้า) เช่น "@superstarsjuice"
+   - PROMPTPAY  : เบอร์พร้อมเพย์ เช่น "0812345678" หรือเลขบัตร ปชช. 13 หลัก
+                  ปล่อยว่าง "" = ยังไม่เปิดจ่ายผ่าน QR (ลูกค้าจะเห็นแค่โอน/ปลายทาง)
+   - PAYEE_NAME : ชื่อเจ้าของบัญชีที่โชว์ใต้ QR (ไม่โชว์เบอร์ — เพื่อความเป็นส่วนตัว)
+   - FREE_AT    : สะสมครบกี่ขวดได้ฟรี 1 ขวด (ลูกค้าต้องคืนขวดครบตามจำนวน)
    ================================================================ */
 var SHOP={
-  LINE_OA:"@boostboost",
-  PROMPTPAY:"",
+  LINE_OA:"@797rbotj",
+  PROMPTPAY:"0612936395",
+  PAYEE_NAME:"น.ส. ทิพยวดี ฤทธิเดช",
   FREE_AT:10
 };
 
@@ -1677,6 +1681,7 @@ function ckRender3(){
   if(ck.pay==='pp'&&SHOP.PROMPTPAY){
     h+='<div class="qr-wrap"><div class="qr-title">📱 '+TT('Scan to pay with any Thai bank app','สแกนจ่ายด้วยแอปธนาคารไหนก็ได้')+'</div>'+
       '<div id="ppqr"></div><div class="qr-amt">฿'+tt.total+'</div>'+
+      (SHOP.PAYEE_NAME?'<p class="qr-payee">'+TT('Account name: ','ชื่อบัญชีผู้รับ: ')+'<b>'+esc(SHOP.PAYEE_NAME)+'</b></p>':'')+
       '<p class="ck-note">'+TT('PromptPay · After paying, tap the green button to send your order + slip in LINE',
         'พร้อมเพย์ · จ่ายแล้วกดปุ่มเขียวด้านล่าง เพื่อส่งออเดอร์และแนบสลิปใน LINE')+'</p></div>';
   }
