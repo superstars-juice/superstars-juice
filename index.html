@@ -152,9 +152,6 @@
   .mr-item .mi-info b{display:block;font-family:var(--head);font-size:.92rem;line-height:1.25}
   .mr-item .mi-info span{display:block;font-size:.8rem;color:var(--muted)}
   .mr-item .mi-qty{font-family:var(--head);font-weight:800;color:var(--accent-d,var(--ink));font-size:1rem;flex:none}
-  .mr-benefit{display:flex;gap:10px;align-items:flex-start;background:#FBEFD9;border-radius:16px;padding:14px 16px;margin-bottom:14px}
-  .mr-benefit svg{flex:none;margin-top:3px;color:var(--coral-d)}
-  .mr-benefit p{margin:0;font-size:.92rem;color:var(--ink);line-height:1.55}
   .mr-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
     border-top:1px dashed var(--line);padding-top:14px}
   .mr-price{font-family:var(--head)}
@@ -709,10 +706,6 @@
         <p id="moodDesc"></p>
       </div>
       <div class="mr-items" id="moodItems"></div>
-      <div class="mr-benefit" id="moodBenefit">
-        <svg width="18" height="18"><use href="#sparkle"/></svg>
-        <p><span id="moodBenefitText"></span></p>
-      </div>
       <div class="mr-foot">
         <div class="mr-price" id="moodPrice"></div>
         <button class="btn btn-accent btn-sm" id="moodAdd"><svg width="16" height="16"><use href="#cart"/></svg><span class="en">Add pack to cart</span><span class="th-only">ใส่แพ็กลงตะกร้า</span></button>
@@ -1103,29 +1096,17 @@ function spSearch(q){return "https://open.spotify.com/search/"+encodeURIComponen
 
 var MOODS=[
   {icon:"sunrise",c:"#FBC13E",en:"Morning Reset",th:"รีเซ็ตยามเช้า",de:"Ease into the day",dt:"เริ่มวันแบบเบา ๆ",pick:"green",
-   pack:{green:2,gold:1},packDe:"Light cleanse + a little sunshine to carry into the day.",packDt:"เบาสบายด้วยกรีน แถมโกลเด้นให้อุ่นใจตลอดวัน",
-   benEn:"Light, fresh, and ready to roll — no forcing it.",
-   benTh:"เบาท้อง สดชื่น พร้อมลุยทั้งวันแบบไม่ต้องฝืนตัวเอง"},
+   pack:{green:2,gold:1},packDe:"Light cleanse + a little sunshine to carry into the day.",packDt:"เบาสบายด้วยกรีน แถมโกลเด้นให้อุ่นใจตลอดวัน"},
   {icon:"dumbbell",c:"#FA6A5F",en:"Post-Workout Boost",th:"หลังออกกำลัง",de:"Refuel and flow",dt:"เติมพลังหลังเวิร์กเอาต์",pick:"coral",
-   pack:{coral:2,green:1},packDe:"Energy for the sweat + a light green to cool back down.",packDt:"เติมพลังด้วยเรด แถมกรีนช่วยให้ร่างกายเย็นลง",
-   benEn:"Energy back fast, refreshed not drained.",
-   benTh:"แรงกลับมาไว ร่างกายสดชื่น ไม่อึดอัดหลังเหงื่อโทรม"},
+   pack:{coral:2,green:1},packDe:"Energy for the sweat + a light green to cool back down.",packDt:"เติมพลังด้วยเรด แถมกรีนช่วยให้ร่างกายเย็นลง"},
   {icon:"briefcase",c:"#F0A81E",en:"Busy Workday",th:"วันงานยุ่ง ๆ",de:"Beat the slump",dt:"สู้ความล้าช่วงบ่าย",pick:"gold",
-   pack:{gold:2,coral:1},packDe:"Golden focus for the desk + a coral kick for the slump.",packDt:"โกลเด้นช่วยโฟกัส แถมเรดปลุกพลังตอนบ่ายง่วง",
-   benEn:"Instant perk-up to power through the afternoon — skip that third coffee.",
-   benTh:"กระปรี้กระเปร่าทันใจ สู้งานได้ทั้งบ่ายโดยไม่ต้องง้อกาแฟแก้วที่สาม"},
+   pack:{gold:2,coral:1},packDe:"Golden focus for the desk + a coral kick for the slump.",packDt:"โกลเด้นช่วยโฟกัส แถมเรดปลุกพลังตอนบ่ายง่วง"},
   {icon:"beach",c:"#54B2C8",en:"Beach Day Refresh",th:"วันสบายริมหาด",de:"Cool and crisp",dt:"สดชื่นเย็นใจ",pick:"green",
-   pack:{green:2,coral:1},packDe:"Crisp green to cool off + coral for beach-day hydration.",packDt:"กรีนให้ความเย็นสดชื่น แถมเรดช่วยเติมน้ำให้ร่างกาย",
-   benEn:"Cool, hydrated, and refreshed after all that sun.",
-   benTh:"เย็นฉ่ำ ชุ่มชื่นทั้งตัว หายร้อนหายเหนื่อยจากแดดไวมาก"},
+   pack:{green:2,coral:1},packDe:"Crisp green to cool off + coral for beach-day hydration.",packDt:"กรีนให้ความเย็นสดชื่น แถมเรดช่วยเติมน้ำให้ร่างกาย"},
   {icon:"leaf",c:"#54B978",en:"Light & Fresh",th:"เบาและสดชื่น",de:"Nothing heavy",dt:"ไม่หนักท้อง",pick:"green",
-   pack:{green:2,gold:1},packDe:"Two light greens + one golden glow for balance.",packDt:"กรีนเบา ๆ สองขวด แถมโกลเด้นช่วยให้สมดุล",
-   benEn:"Light all over, zero bloat, plus a little glow.",
-   benTh:"เบาสบายทั้งตัว ไม่อืดไม่หนักท้อง แถมสดใสขึ้นอีกนิด"},
+   pack:{green:2,gold:1},packDe:"Two light greens + one golden glow for balance.",packDt:"กรีนเบา ๆ สองขวด แถมโกลเด้นช่วยให้สมดุล"},
   {icon:"moon",c:"#7FCBDD",en:"Weekend Recovery",th:"ฟื้นฟูสุดสัปดาห์",de:"Warm reset",dt:"อบอุ่น ฟื้นตัว",pick:"gold",
-   pack:{gold:2,green:1},packDe:"Warm and cozy golden + a light green reset for the week ahead.",packDt:"โกลเด้นอุ่นสบาย แถมกรีนช่วยให้รู้สึกสดชื่น พร้อมสู้สัปดาห์ใหม่",
-   benEn:"Warm, chill, and refreshed — ready for the new week.",
-   benTh:"อบอุ่น ผ่อนคลาย สดชื่นพร้อมลุยสัปดาห์ใหม่แบบสบายใจสุด ๆ"}
+   pack:{gold:2,green:1},packDe:"Warm immunity boost + a green reset for the week ahead.",packDt:"โกลเด้นเสริมภูมิ แถมกรีนล้างพิษ พร้อมสู้สัปดาห์ใหม่"}
 ];
 
 var LIFE=[
@@ -1236,7 +1217,6 @@ function showMood(i){
   var tag=$('#moodTag'); tag.innerHTML='<span class="en">Recommended pack</span><span class="th-only">แพ็กที่เราแนะนำ</span>';
   $('#moodName').innerHTML='<span class="en">'+m.en+'</span><span class="th-only">'+m.th+'</span>';
   $('#moodDesc').innerHTML='<span class="en">'+(m.packDe||p.ben_en)+'</span><span class="th-only">'+(m.packDt||p.ben_th)+'</span>';
-  $('#moodBenefitText').innerHTML='<span class="en">'+(m.benEn||p.ben_en)+'</span><span class="th-only">'+(m.benTh||p.ben_th)+'</span>';
 
   var qty=0,sub=0;
   var itemsHtml=ids.map(function(id){
